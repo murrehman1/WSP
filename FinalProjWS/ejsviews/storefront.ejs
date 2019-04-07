@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <% include ./partials/header %>
+
+        <title>Store Front</title>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1 class="display-4">Store Front</h1>
+        <div class="container">
+            <a href="/showcart" class= "btn btn-primary">Show ShoppingCart</a>
+            <div class="row">
+                <% for (const cloth of clothes) { %>
+                    <div class="col-sm">
+                        <div class="card" style="width: 18rem;">
+                            <img src="/public/images/<%=cloth.image%>" src=".../100px180/" alt="Card image cap" height="300" width: "15">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%=cloth.title%>
+                                </h5>
+                                <p class="card-text">
+                                    <%=cloth.description%>
+                                        <br>
+                                        <%= utils.dollar.format(cloth.price)%>
+                                </p>
+                                <form action='/add2cart' method="POST">
+                                    <input type="hidden" name="_id" value= "<%=cloth._id%>">
+                                    <input type="hidden" name="title" value= "<%=cloth.title%>">
+                                    <input type="hidden" name="price" value= "<%=cloth.price%>">
+
+                                    <button type="submit" class="btn btn-primary"> Add to ShoppingCart</button>
+                                </form>        
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+        </div>
+
+    </div>
+
+            <% include ./partials/scripts %>
+</body>
+
+</html>
